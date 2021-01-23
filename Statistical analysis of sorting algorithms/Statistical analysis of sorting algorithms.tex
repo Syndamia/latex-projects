@@ -1,0 +1,232 @@
+% Document must be built with XeLaTeX
+% License and source at https://github.com/Syndamia/latex-projects
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{pgfplots}  
+\pgfplotsset{height=8cm, width=10cm}  
+
+\usepackage{fontspec} % loaded by polyglossia, but included here for transparency 
+\usepackage{polyglossia}
+\setmainlanguage{russian} % alternative for lack of bulgarian support
+\setotherlanguage{english}
+\addto\captionsrussian{
+  \renewcommand{\contentsname}{Съдържание}
+  \renewcommand{\refname}{Източници}
+}
+\newfontfamily\russianfont{Times New Roman}
+
+\bibliographystyle{plain}
+
+\title{Статистическо изследване върху алгоритми за сортиране}
+\author{Камен Димитров Младенов}
+\date{23 Януари 2021}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{Същност и избор на темата}
+
+Сортиращият алгоритъм е един от най-важните аспекти на програмирането в днешно време. 
+Чрез него, дадени елементи могат да бъдат подредени в нарастваща (или намаляваща) последователност, което намира употреба във всичко от новинарски сайтове и социални медии, до видео игри и операционни системи.
+
+Този тип алгоритъм бива изследван практически от началото на компютърната наука - най-ранните сортиращи алгоритми се забелязват през 1951, а анализиране на Bubble Sort, може би най-известния сортиращ алгоритъм, бива извършено още през 1957.\cite{wikipedia_sorting_algorithm_history}
+
+В днешно време има десетки и стотици алгоритми, което дълбоко усложнява изборът на обикновения програмист. 
+Затова тази статия се стреми да сравни главните им характеристики.
+
+\section{Избор на алгоритми и разглеждани харакетристики}
+
+Избраните алгоритми за сравнение са подбрани от Toptal\cite{toptal}. Този сайт не е в никъв случай решаващо място за най-известни алгоритми, но за целите на този документ е достатъчен. 
+
+Избраните алгоритми са:
+
+\begin{itemize}
+\item Shell Sort
+\item Merge Sort
+\item Heap Sort
+\item Quick Sort
+\end{itemize}
+
+Данни отностно характеристиките им ще бъдат взети от Toptal\cite{toptal} и от warp.povusers.org\cite{comparing_algorithms}. Отново, тези сайтове не са решаващи източници на която и да е от данните, но са достатъчни. 
+
+Избрани характеристики:
+
+\begin{itemize}
+\item Сложност
+\item Скорост
+\item Брой сравнения
+\item Брой записвания
+\end{itemize}
+
+\newpage
+
+\section{Представителна извадка}
+
+Разглеждайки дадените източници, можем да извадим следните стойности:
+\begin{center}
+\begin{tabular}{|c|c c c c|}
+	\hline
+	Име на алгоритъм & Сложност & Скорост & Брой сравнения & Брой записвания \\[3pt]
+	\hline\hline
+	Shell Sort & 6666 & 0.71 & 101319 & 136506 \\[3pt]
+	Merge Sort & 18494 & 0.67 & 56823 & 70000 \\[3pt]
+	Heap Sort & 18494 & 0.59 & 107688 & 171318 \\[3pt]
+	Quick Sort & 18494 & 0.60 & 95321 & 42888 \\[3pt]
+	\hline
+\end{tabular}
+\end{center}
+
+Важни бележки отностно вземането на тези данни: 
+\begin{itemize}
+\item сложността е изчислена при горната граница (O) с 5000 елемента
+\item скоростта, броят сравнения и броят записвания са взети при сравнение на 5000 случайно разбъркани целочислени числа с минимални повторения помежду им\cite{comparing_algorithms}
+\item скоростта (както записано в warp.povusers.org\cite{comparing_algorithms}) е в милисекунди
+\item в ситуации на неизвестна или променлива абсолютна максимална сложност, се използва тази сложност, която дава най-висока стойност
+\end{itemize}
+
+\section{Статистика на данните}
+
+Снабдени с данни, вече можем да правим статистичен анализ върху тях. Следващите подраздели показват с таближи и диаграми различни свойства и суотношения на тази информация.
+
+\subsection{Вариационни редове}
+
+\begin{center}
+\begin{tabular}{|c|c c c c|}
+	\hline
+	 & Shell sort & Merge Sort & Heap Sort & Quick Sort \\[3pt]
+	Сложност & 6666 & 18494 & 18494 & 18494 \\[3pt]
+	\hline\hline
+	 & Heap sort & Quick Sort & Merge Sort & Shell Sort \\[3pt]
+	Скорост & 0.59 & 0.60 & 0.67 & 0.71 \\[3pt]
+	\hline\hline
+	 & Merge sort & Quick Sort & Shell Sort & Heap Sort \\[3pt]
+	Брой сравнения & 56823 & 95321 & 101319 & 107688 \\[3pt]
+	\hline\hline
+	 & Quick sort & Merge Sort & Shell Sort & Heap Sort \\[3pt]
+	Брой записвания & 42888 & 70000 & 136506 & 171318 \\[3pt]
+	\hline
+\end{tabular}
+\end{center}
+
+\subsection{Мода, медиана, средна стойност}
+
+\begin{center}
+\begin{tabular}{|c|c c c|}
+	\hline
+	Характеристика & Мода & Медиана  & Средна стойност\\[3pt]
+	\hline\hline
+	Сложност & 18494 & $(18494 + 18949)/2 = $\underline{$18494$} & 15537 \\[3pt]
+	Скорост & Няма & $(0.60+0.67)/2 = $\underline{$0.635$} & 0.6425 \\[3pt]
+	Брой сравнения & Няма & $(95321 + 101319)/2 = $\underline{$98320$} & 90287.75 \\[3pt]
+	Брой записвания & Няма & $(70000 + 136506)/2 = $\underline{$103253$} & 105178 \\[3pt]
+	\hline
+\end{tabular}
+\end{center}
+
+\subsection{Сравнение на данни}
+
+\begin{center}
+\begin{tikzpicture}  
+  
+\begin{axis}  
+[  
+    ybar,  
+    enlargelimits=0.15,  
+    ylabel={\ Сложност},
+    xlabel={\ Алгоритъм},  
+    symbolic x coords={Shell, Merge, Heap, Quick}, 
+    xtick=data,  
+     nodes near coords, % this command is used to mention the y-axis points on the top of the particular bar.  
+    nodes near coords align={vertical},  
+    ]  
+\addplot coordinates {(Shell,6666) (Merge,18494) (Heap,18494) (Quick,18494) };  
+  
+\end{axis}  
+\end{tikzpicture}
+ 
+\textbf{Диаграма 1: Сравнение на сложност}
+
+\begin{tikzpicture}  
+\begin{axis}  
+[
+    ybar,  
+    enlargelimits=0.15,  
+    ylabel={\ Скорост (в милисекунди)},
+    xlabel={\ Алгоритъм},  
+    symbolic x coords={Shell, Merge, Heap, Quick}, 
+    xtick=data,  
+     nodes near coords, % this command is used to mention the y-axis points on the top of the particular bar.  
+    nodes near coords align={vertical},  
+    ]  
+\addplot coordinates {(Shell,0.71) (Merge,0.67) (Heap,0.59) (Quick,0.60) };  
+  
+\end{axis}  
+\end{tikzpicture}  
+
+\textbf{Диаграма 2: Сравнение на скорост}
+
+\begin{tikzpicture}  
+\begin{axis}  
+[  
+    ybar,  
+    enlargelimits=0.15,  
+    ylabel={\ Брой сравнения},
+    xlabel={\ Алгоритъм},  
+    symbolic x coords={Shell, Merge, Heap, Quick}, 
+    xtick=data,  
+     nodes near coords, % this command is used to mention the y-axis points on the top of the particular bar.  
+    nodes near coords align={vertical},  
+    ]  
+\addplot coordinates {(Shell,101319) (Merge,56823) (Heap,107688) (Quick,95321) };  
+  
+\end{axis}  
+\end{tikzpicture}
+
+\textbf{Диаграма 3: Сравнение на брой сравнения}
+
+\begin{tikzpicture}  
+\begin{axis}  
+[  
+    ybar,  
+    enlargelimits=0.15,  
+    ylabel={\ Брой записвания},
+    xlabel={\ Алгоритъм},  
+    symbolic x coords={Shell, Merge, Heap, Quick}, 
+    xtick=data,  
+     nodes near coords, % this command is used to mention the y-axis points on the top of the particular bar.  
+    nodes near coords align={vertical},  
+    ]  
+\addplot coordinates {(Shell,136506) (Merge,70000) (Heap,171318) (Quick,42888) };
+
+\end{axis}
+\end{tikzpicture}
+
+\textbf{Диаграма 4: Сравнение на брой записвания}
+  
+\end{center}
+
+\section{Заключение и анализ на резултатите}
+
+Получената информация дава интересен, но дълбоко непълен, поглед към ефикасността на тези четири алгоритъма. 
+Разбира се, данните са събрани при само един тест в само една ситуация, затова каквото заключение да направим, то не бива да бъде взето за дадено.
+
+Quick Sort, макар и думата "бърз" да фигурира в името му, не е толкова по-скоростен от другите алгоритми, даже е по-бавен от Heap Sort!
+Като сме започнали да говорим за Heap Sort, той има същиата сложност, обаче му трябват повече сравнения и записвания.
+
+Интересно наблюдение е как сложността на Shell Sort е почти три пъти по-малка от другите три алгоритъма, обаче е почти най-бавния и изискващия най-много сравнения и записвания.
+
+Обаче, в края на деня, се забелязва най-важното нещо: всеки алгоритъм има своя роля. Най-прост е Shell, най-бърз е Heap, най-малко сравнения ползва Merge и най-малко записвания прави Quick. 
+Правилния начин на избор на един от тези алгоритми е анализирането на ситуацията в която ще се ползва. 
+Но, за тези, които имат три дена да довършат програмата си, Quick Sort е добър избор. 
+Във всички категории, които разгледахме, той е на второ или първо място, нещо, което не се вижда често.
+
+\newpage
+
+\nocite{*}
+\bibliography{sources}
+
+\end{document}
