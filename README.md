@@ -1,4 +1,4 @@
 # latex-projects
-All of my LaTeX documents
+All of my LaTeX documents from high school. This repository will stay up as an archive.
 
-This has a new home at [https://gitlab.com/Syndamia/School-Projects/-/tree/master/LaTeX](https://gitlab.com/Syndamia/School-Projects/-/tree/master/LaTeX).
+The files have a more proper home, over at [https://gitlab.com/Syndamia/School-Projects/-/tree/master/LaTeX](https://gitlab.com/Syndamia/School-Projects/-/tree/master/LaTeX).
